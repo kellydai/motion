@@ -1,0 +1,25 @@
+import simplegui
+
+width=400
+height=500
+ini_pos=[width/2,height/2]
+vel=[1,5]
+radius=10
+
+def tick():
+    global ini_pos,ball_pos
+    ini_pos[0]+=vel[0]
+    ini_pos[1]+=vel[1]
+    
+def draw(canvas):
+    global ball_pos
+    canvas.draw_circle(ini_pos,radius,5,"red")
+    
+    
+frame=simplegui.create_frame("ball",width,height)
+frame.set_draw_handler(draw)
+timer=simplegui.create_timer(100,tick)
+
+frame.start()
+timer.start()
+    
