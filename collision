@@ -3,28 +3,33 @@ import simplegui
 width=400
 height=500
 radius=10
-ini_pos=[width/2,height/2]
-vel=[0,10]
-sit=True
+ini_pos=[width,0]
+vel=[5,2]
+sit=True#left
+
 
 def tick():
     global ini_pos,sit
-    if ini_pos[1]>radius and sit==True:
-        ini_pos[1]-=vel[1]
-    elif ini_pos[1]<=radius and sit==True:
+    if ini_pos[0]>radius and sit==True:
+        ini_pos[0]-=vel[0]
         ini_pos[1]+=vel[1]
+    elif ini_pos[0]<=radius and sit==True:
+        ini_pos[1]+=vel[1]
+        ini_pos[0]+=vel[0]
         sit=False
-    elif ini_pos[1]<height-radius and sit==False:
-        ini_pos[1]+=vel[1]        
-    elif ini_pos[1]>=height-radius and sit==False:
-        ini_pos[1]-=vel[1]
+    elif ini_pos[0]<width-radius and sit==False:
+        ini_pos[0]+=vel[0]
+        ini_pos[1]+=vel[1]
+    elif ini_pos[0]>=width-radius and sit==False:
+        ini_pos[1]+=vel[1]
+        ini_pos[0]-=vel[0]
         sit=True
     
 def draw(canvas):    
     canvas.draw_circle(ini_pos,radius,5,"red")
     
 frame=simplegui.create_frame("pong",width,height)
-timer=simplegui.create_timer(100,tick)
+timer=simplegui.create_timer(50,tick)
 frame.set_draw_handler(draw)
 
 frame.start()
